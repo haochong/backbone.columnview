@@ -41,11 +41,19 @@
         nextColumn: function(e) {
             var manager = this.options.manager
               , views = manager.views
+              , selectedItem = $(e.target)
               , viewIndex = this.viewIndex
               , newViews = [];
 
             var list = new manager.CollectionClass();
-            list.url = $(e.target).data("url");
+
+            this.$el.find('a.selected').removeClass('selected');
+            selectedItem.addClass('selected');
+
+            manager.$el.find('a.highlight').removeClass('highlight');
+            selectedItem.addClass('highlight');
+
+            list.url = selectedItem.data("url");
             list.fetch({
                 success: function(collection, response) {
                     if(viewIndex < views.length) {
