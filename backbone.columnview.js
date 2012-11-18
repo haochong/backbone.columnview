@@ -63,7 +63,7 @@
                         views.splice(viewIndex+1, views.length);
                     }
                     if(collection && collection.length) {
-                        manager.nextColumn(collection);
+                        manager.addColumn(collection);
                     }
                 }
             });
@@ -95,23 +95,19 @@
                 position: "relative"
             });
             if(this.collection) {
-                this.nextColumn(this.collection);
+                this.addColumn(this.collection);
             }
-        },
-        events: {
-            "click .next-btn": "nextColumn"
         },
         render: function() {
             return this;
         },
-        nextColumn: function(_collection) {
-            console.trace('nextColumn');
+        addColumn: function(_collection) {
             if(_collection.length) {
                 var column = new Backbone.ColumnView({ collection: _collection, manager: this });
                 this.views.push(column);
                 this.$el.append(column.render().$el);
             } else {
-                //console.error('collection error');
+                console.error('collection error');
             }
         }
 
